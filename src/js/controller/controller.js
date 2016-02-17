@@ -5,17 +5,19 @@ var squareNumbers = require('../modules/square-numbers');
 var personModule = require('../modules/person-module');
  var controller = (function(){
 
-		var person = new personModule({name: 'henrik'});
+		var person = new personModule();
 
 		// watch it
-		person.on('change:isDancing', function () {
-		    console.log('shake it!');
+		person.on('change:firstName', function () {
+		    console.log('firstName changed!');
 		});
-
+    person.firstName = "riyaz";
+    person.lastName = "hawaldar";
+    person.numberOfChildren = 1;
+    console.log(person.fullName);
+    console.log("watching");
 		// set the value and the callback will fire
 		//person.isDancing = true;
-
-
 
 
  	var controller_inputData = function(){
@@ -32,6 +34,6 @@ var personModule = require('../modules/person-module');
   	 square:square,
   	 addition:addition
   }
- })()
+ })();
 
  module.exports = controller;

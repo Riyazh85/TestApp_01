@@ -1,21 +1,34 @@
-var State = require('ampersand-state');
+var AmpersandState = require('ampersand-state');
 
-// Create a constructor to represent the state we want to store
-var Person = State.extend({
+var Person = AmpersandState.extend({
+	initialize: function(){
+			console.log("initialized");
+	},
     props: {
-        name: 'string',
-        isDancing: 'boolean'
+        firstName: 'string',
+        lastName: 'string',
+        numberOfChildren: {
+            type: 'number',
+            test: function(value){
+                if (value < 0) {
+                    return "Must be a positive number";
+                }
+                return false;
+            }
+        }
+    },
+    session: {
+        signedIn: ['boolean', true, false],
+    },
+    derived: {
+        fullName: {
+            deps: ['firstName', 'lastName'],
+            fn: function () {
+                return this.firstName + ' ' + this.lastName;
+            }
+        }
     }
+    
 });
 
 module.exports = Person;
-// Create an instance of our object
-var person = new Person({name: 'henrik'});
-
-// watch it
-person.on('change:isDancing', function () {
-    console.log('shake it!');
-});
-
-// set the value and the callback will fire
-person.isDancing = true;

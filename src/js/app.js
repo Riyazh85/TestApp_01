@@ -9,3 +9,4 @@
   console.log('Input is:', input);
   console.log('Squared is:', moduleController.square(input));
   console.log('Addition is:', moduleController.addition(input));
+  console.log('Squared:', moduleController.square(input));
